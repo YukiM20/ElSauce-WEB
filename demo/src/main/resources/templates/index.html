@@ -1,15 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurante El Sauce</title>
-    <link rel="stylesheet" href= "assets/css/styles.css">
-    <link type="image/png" sizes="50x50" href="logo">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="Fragmentos/fragmentos :: head"></head>
 <body>
  <!-- Botón de cabecera -->
 <div class="cabecera-pag">
@@ -65,9 +56,7 @@
   
 </div>
 <!--Cabecera-->
-<div th:replace="header">
-    <a href="Fragmentos/fragmentos.html"></a>
-</div>
+<div th:replace="Fragmentos/fragmentos :: header"></div>
 <!--section-->
 
     <section class="hero-section">
