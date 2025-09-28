@@ -3,6 +3,8 @@
    ========================= */
 @import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 :root {
+  --color-verdeOsc:#04433C;
+  --color-blancoCalido:#F9F7F4;
   --color-grisnosc:#333333;
   --color-gris: #555555;
   --color-turquesa: #3BA99C;
@@ -15,7 +17,7 @@
   --color-rojo: #dc3545;
   --color-fd-blanco: #ffffff;
   --color-azulosc: #3a3d72;
- 
+  --color-negro:#1C1C1C;
   --color-celesteoscuro: #0072ff;
   --color-verdeazulado: #1DC1B6;
   --fuente-fredoka: "Fredoka", sans-serif;
@@ -33,7 +35,9 @@
   --text-3xl: 48px;
 }
 * { margin: 0; padding: 0; font-family: var(--fuente-fredoka); text-decoration: none; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; 
+  scroll-padding-top: 80px; 
+}
 
 /* =========================
    ESTILOS GENERALES
@@ -42,6 +46,130 @@ section { margin-bottom: var(--spacing-xl); margin-top: 0; }
 main { padding-top: 1rem; }
 img { max-width: 100%; }
 span { font-size: var(--text-sm); font-weight: 400; }
+body{ background-color: var(--color-blancoCalido);}
+
+.logo{
+  height: 60px;
+  padding: 5%;
+}
+.navbar{
+ background-color: var(--color-negro);
+  height: 80px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  border-bottom: 4px solid var(--color-verde);
+}
+.navbar a{
+  color: var(--color-verde);
+}
+.navbar a:hover{
+  color: var(--color-fd-blanco);
+  border-bottom: 2px solid var(--color-fd-blanco)
+}
+/*Carrusel*/
+.carrusel{
+  padding-top: 80px;
+}
+.carousel-caption-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background: rgba(0,0,0,0.35);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 2;
+  pointer-events: none; /* desactiva clics en toda la capa */
+}
+.logo_carrusel{
+  height: 400px;
+}
+.carousel-caption-overlay .logo_carrusel,
+.carousel-caption-overlay .btn-tour {
+  pointer-events: auto; /* vuelve a activar clics en logo y botón */
+}
+
+.carousel-caption-overlay .logo_carrusel {
+  max-width: 400px;
+  color: var(--color-fd-blanco);
+}
+/*NUESTRA CARTA*/
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.cards-wrapper {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.card {
+  flex: 0 0 25%; /* 4 cards visibles */
+  margin: 0 0.5%;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.image-wrapper {
+  height: 22vw;
+  overflow: hidden;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 1em;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  margin-bottom: 0.5em;
+}
+
+.card-text {
+  font-size: 0.9rem;
+  margin-bottom: 1em;
+}
+
+.btn-primary {
+  font-size: 0.9rem;
+  padding: 0.4em 0.8em;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  font-size: 2rem;
+  padding: 0 1rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.carousel-btn.prev { left: 0; }
+.carousel-btn.next { right: 0; }
+
+/* Responsive */
+@media (max-width: 1200px) { .card { flex: 0 0 32%; } } /* 3 cards */
+@media (max-width: 992px)  { .card { flex: 0 0 48%; } } /* 2 cards */
+@media (max-width: 576px)  { .card { flex: 0 0 100%; } } /* 1 card */
+
 
 /* ==== Dashboard ==== */
 .dashboard-container {
@@ -599,37 +727,38 @@ span.direccion {
   line-height: 125%;
   font-weight: 700;
   color: var(--color-verde);
+ 
 }
 
 .subtituloCart {
-  margin-top: 15px;
-  margin-bottom: 20px;
+  margin: 0;
   font-weight: 400;
-  font-size: var(--text-xl);
-  color: var(--color-turquesa);
+  font-size: var(--text-md);
+  color: var(--color-coral);
   line-height: 125%;
   max-width: 100%;
   border-bottom: none;
 }
 
 .parrafoCart {
+  margin: 0;
   max-width: 100%;
   font-weight: 400;
-  font-size: var(--text-md);
-  line-height: 165%;
+  font-size: var(--text-sm);
+  line-height: 130%;
   letter-spacing: 0.03em;
-  color: var(--color-grisnosc);
+  color: var(--color-negro);
 }
 
 .estadisticas-nosotros {
-  background-color: var(--color-arena);
-  color: var(--color-coral);
+  background-color: var(--color-coral);
+  color: var(--color-blancoCalido);
   border-radius: 32px;
   width: 100%;
   
   margin-left: auto;
   margin-right: auto;
-  padding: var(--spacing-md);
+  padding: var(--spacing-sm);
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -649,11 +778,11 @@ span.direccion {
 }
 
 .estats strong {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .txt-estats {
-  font-size: var(--text-sm);
+  font-size: var(--text-xs);
   line-height: 140%;
   max-width: 116px;
   text-align: center;
@@ -672,7 +801,7 @@ span.direccion {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 20px;
+  gap: 10px;
   flex: 1;
   
   width: 100%;
@@ -698,9 +827,9 @@ span.direccion {
 .txt-datos {
   max-width: 400px;
   text-align: left;
-  font-size: var(--text-lg);
+  font-size: var(--text-xs);
   flex: 1;
-  color: var(--color-grisnosc);
+  color: var(--color-negro);
 }
 
 #click-nosotros {
@@ -747,17 +876,6 @@ span.direccion {
   position: relative;
 }
 
-.idea-icon {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 120px;
-}
-
-.idea-img {
-  width: 100%;
-  height: auto;
-}
 
 .clases-title {
   font-size: var(--text-2xl);
@@ -767,11 +885,11 @@ span.direccion {
 }
 
 .clases-subtitle {
-  font-size: var(--text-lg);
+  font-size: var(--text-sm);
   max-width: 800px;
   margin: 0 auto;
   line-height: 1.6;
-  color: var(--color-turquesa);
+  color: var(--color-negro);
 }
 
 .clases-cards {
@@ -922,7 +1040,7 @@ TE PUEDE SERVIR PARA EL RESPONSIVE, GIAN
 }
 
 .subtitulo {
-  color: var(--color-turquesa);
+  color: var(--color-verde);
   font-family: var(--fuente-fredoka);
   font-size: var(--text-xl);
   margin: 0;
@@ -930,7 +1048,7 @@ TE PUEDE SERVIR PARA EL RESPONSIVE, GIAN
 }
 
 .titulo-principal {
-  color: var(--color-verde);
+  color: var(--color-coral);
   font-size: var(--text-2xl);
   font-weight: bold;
   font-family: var(--fuente-fredoka);
@@ -1001,7 +1119,7 @@ TE PUEDE SERVIR PARA EL RESPONSIVE, GIAN
 .events h3 {
   font-size: var(--text-xl);
   margin-bottom: var(--spacing-lg);
-  color: var(--color-turquesa);
+  color: var(--color-coral);
   border-bottom: none;
 }
 
@@ -1076,7 +1194,7 @@ TE PUEDE SERVIR PARA EL RESPONSIVE, GIAN
 }
 
 .blog-header h3 {
-  color: var(--color-turquesa);
+  color: var(--color-coral);
   font-size: var(--text-xl);
   border-bottom: none;
 }
@@ -1153,7 +1271,7 @@ TE PUEDE SERVIR PARA EL RESPONSIVE, GIAN
    CTA
    ========================= */
 .cta-section {
-  background-color: var(--color-arena);
+  background-color: var(--color-negro);
   padding: var(--spacing-lg) var(--spacing-md);
   margin-top: 0;
   margin-bottom: 0;

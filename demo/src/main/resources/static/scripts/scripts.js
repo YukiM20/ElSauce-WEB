@@ -167,3 +167,40 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+//cards carrusel
+const wrapper = document.querySelector('.cards-wrapper');
+const cards = document.querySelectorAll('.cards-wrapper .card');
+const prevBtn = document.querySelector('.carousel-btn.prev');
+const nextBtn = document.querySelector('.carousel-btn.next');
+
+let index = 0;
+
+function getVisibleCards() {
+  const width = window.innerWidth;
+  if(width <= 576) return 1;
+  if(width <= 992) return 2;
+  if(width <= 1200) return 3;
+  return 4;
+}
+
+function updateTransform() {
+  const visible = getVisibleCards();
+  wrapper.style.transform = `translateX(-${(100 / visible) * index}%)`;
+}
+
+nextBtn.addEventListener('click', () => {
+  const visible = getVisibleCards();
+  if (index < cards.length - visible) {
+    index++;
+    updateTransform();
+  }
+});
+
+prevBtn.addEventListener('click', () => {
+  if (index > 0) {
+    index--;
+    updateTransform();
+  }
+});
+
+window.addEventListener('resize', updateTransform);
