@@ -60,15 +60,25 @@ body{ background-color: var(--color-fd-blanco);}
 /* Cuando la pantalla es más pequeña, dejamos que el logo use un poco más de espacio */
 @media (max-width: 991px) {
   .navbar .logo {
-    max-height: 50px;
+    max-height: 60px;
   }
 }
 
 @media (max-width: 576px) {
   .navbar .logo {
-    max-height: 40px;
+    max-height: 60px;
   }
 }
+
+/*Fondo del menú desplegable en móviles*/
+@media (max-width: 991px) { 
+  .navbar-collapse {
+    background-color: #212529;
+    padding: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
 .navbar {
   height: 80px;
   position: fixed;
