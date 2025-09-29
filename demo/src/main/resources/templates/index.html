@@ -3,49 +3,8 @@
 <head th:replace="Fragmentos/fragmentos :: head"></head>
 <body>
 
-<!-- Modal (oculto por defecto) -->
-<div id="modalReserva" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2>Registrate con nosotros</h2>
-    <form id="formReserva">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" required><br>
-
-        <label for="correo">Correo:</label>
-        <input type="email" id="correoRegistro" required><br>
-
-        <label for="password">Contraseña:</label>
-        <input type="password" id="passwordRegistro" required><br>
-
-        <label for="telefono">Teléfono:</label>
-        <input type="tel" id="telefono" required><br>
-
-       <button class="btn-submit" type="submit" >Continuar</button>
-        
-    </form>
-    <button id="openLogin" class="btnModal" >¿Ya tienes cuenta? Inicia sesión</button>
-  </div>
-</div>
-<!-- Modal Login (oculto por defecto) -->
-<div id="modalLogin" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2>Inicia sesión</h2>
-    <form id="formLogin">
-        <label for="correo">Correo:</label>
-        <input type="email" id="correoLogin" required><br>
-
-        <label for="password">Contraseña:</label>
-        <input type="password" id="passwordLogin" required><br>
-
-        <button class="btn-submit" type="submit" >Continuar</button>
-        
-    </form>
-    <button class="btnModal" id="openRegistro">¿No tienes cuenta? Regístrate</button>
-  </div>
-  
-</div>
+<div th:replace="Fragmentos/fragmentos :: reserva"></div>
+<div th:replace="Fragmentos/fragmentos :: login_cli"></div>
 <!--Cabecera-->
 <div th:replace="Fragmentos/fragmentos :: header"></div>
 <!--section-->
@@ -77,43 +36,12 @@
   </button>
 
   <div class="carousel-caption-overlay">
-    <img src="imgs/logo_el_sauce.png" alt="Logo" class="logo_carrusel">
+    <img src="imgs/logo_el_sauce_blanco.png" alt="Logo" class="logo_carrusel">
     <h1 class="text-white fw-bold">Restaurante Turístico</h1>
     <p class="text-white fs-4">"Una comida inolvidable"</p>
-    <button class="btn-tour" id="openReserva">Haz una reservación</button>
   </div>
 
 </div>
-
-</section>
-
-    <!-- Sección de sobre nosotros -->
-        <section class="sobre-nosotros" id="sobre-nosotros">
-           
-            <div class="div-img-niños">
-                <img id="img-niños" src="imgs/laguna.png" alt="niños felices en juego">
-            </div>
-            <div class="nosotros-cont">
-            <h2 class="tituloCart">Un lugar para disfrutar en familia</h2>
-            <h3 class="subtituloCart">En Restaurante El Sauce ofrecemos una experiencia gastronómica única frente a la Laguna Azul, en Tarapoto</h3>
-            <p class="parrafoCart">Nos enfocamos en la calidez, la tradición y el sabor auténtico de la selva peruana, combinando un ambiente natural con platos preparados con ingredientes frescos de la región. Aquí cada visita se convierte en un momento especial para compartir y recordar</p>
-            
-                <div class="estadisticas-nosotros">
-                    <div class="estats"><strong>14+</strong><span class="txt-estats">Años compartiendo tradición y sabor</span></div>
-                    <div class="estats"><strong>50+</strong><span class="txt-estats">Platos típicos en nuestra carta</span></div>
-                    <div class="estats"><strong>7+</strong><span class="txt-estats">Reconocimientos por nuestra comida y servicio</span></div>
-                </div>
-                <div id="datos-y-btn-info">
-                    <div class="datos-nos-cont">
-                        <div class="datos-nos"><i class="fas fa-baby"></i><span class="txt-datos">Atención de primera</span></div>
-                        <div class="datos-nos"><i class="fas fa-chalkboard-teacher"></i><span class="txt-datos">Cocineros calificados</span></div>
-                        <div class="datos-nos"><i class="fas fa-tasks"></i><span class="txt-datos">Ingredientes frescos del día</span></div>
-                        <div class="datos-nos"><i class="fas fa-book-reader"></i><span class="txt-datos">Experiencia gastronómica auténtica</span></div>
-                    </div>
-                    <img id="click-nosotros" src="imgs/circuloplayazul.png" alt="nosotros btn infoo">
-                </div>
-            </div>
-        </section>
 
         <!-- Sección de Nuestras Clases -->
          <section class="clases-section" id="nuestra-carta">

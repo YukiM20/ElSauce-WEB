@@ -49,11 +49,27 @@ img { max-width: 100%; }
 span { font-size: var(--text-sm); font-weight: 400; }
 body{ background-color: var(--color-fd-blanco);}
 
-.logo{
-  height: 60px;
-  padding: 5%;
+.navbar .logo {
+  max-height: 60px; /* Tamaño normal del logo */
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  transition: max-height 0.3s ease;
 }
-.navbar{
+
+/* Cuando la pantalla es más pequeña, dejamos que el logo use un poco más de espacio */
+@media (max-width: 991px) {
+  .navbar .logo {
+    max-height: 50px;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar .logo {
+    max-height: 40px;
+  }
+}
+.navbar {
   height: 80px;
   position: fixed;
   top: 0;
@@ -62,44 +78,135 @@ body{ background-color: var(--color-fd-blanco);}
   z-index: 1000;
   border-bottom: 4px solid var(--color-verde);
 }
+
 .navbar.navbar-expand-lg .nav-link {
   color: var(--color-verde);
 }
+
 .navbar .nav-link:hover {
   color: var(--color-fd-blanco);
   border-bottom: 2px solid var(--color-fd-blanco);
 }
+
+/* ✅ Aquí agregas tu botón para que quede alineado en el navbar */
+.navbar .btn-tour {
+  background-color: var(--color-verde);
+  color: var(--color-fd-blanco);
+  border-radius: 6px;
+  padding: 0.5em 1em;
+  margin-left: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.navbar .btn-tour:hover {
+  background-color: var(--color-fd-blanco);
+  color: var(--color-verde);
+  border: 1px solid var(--color-verde);
+  transform: none;
+}
+
+/* En móviles ocupa el ancho del menú desplegable */
+@media (max-width: 991px) {
+  .navbar .btn-tour {
+    display: block;
+    width: 100%;
+    margin: 1rem 0 0;
+    text-align: center;
+  }
+}
+
 /*Carrusel*/
-.carrusel{
+.carrusel {
   padding-top: 80px;
 }
+
 .carousel-caption-overlay {
-  position: absolute;
+  position: absolute; /* ✅ mantenemos absoluto para cubrir el carrusel */
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   display: flex;
-  background: rgba(0,0,0,0.35);
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   z-index: 2;
-  pointer-events: none; /* desactiva clics en toda la capa */
-}
-.logo_carrusel{
-  height: 400px;
-}
-.carousel-caption-overlay .logo_carrusel,
-.carousel-caption-overlay .btn-tour {
-  pointer-events: auto; /* vuelve a activar clics en logo y botón */
+  pointer-events: none;
+  padding: 1rem;
+  /* ❌ QUITAMOS position: relative */
 }
 
-.carousel-caption-overlay .logo_carrusel {
-  max-width: 400px;
-  color: var(--color-fd-blanco);
+/* ✅ Pseudo-elemento se mantiene */
+.carousel-caption-overlay::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1; /* detrás del contenido */
 }
+
+/* ✅ Todo el contenido del overlay encima de la capa oscura */
+.carousel-caption-overlay > * {
+  position: relative;
+  z-index: 2;
+}
+
+.carousel-caption-overlay .logo_carrusel,
+.carousel-caption-overlay .btn-tour {
+  pointer-events: auto;
+}
+
+/* --- Logo responsivo --- */
+.logo_carrusel {
+  width: 70%;
+  max-width: 300px;
+  height: auto;
+  margin-bottom: 1rem;
+  transition: max-width 0.3s ease;
+}
+
+/* --- Texto responsivo --- */
+.carousel-caption-overlay h1 {
+  font-size: clamp(1.2rem, 3.5vw, 2rem);
+  font-weight: bold;
+  color: var(--color-fd-blanco);
+  margin: 0.5rem 0;
+}
+
+.carousel-caption-overlay p {
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
+  color: var(--color-fd-blanco);
+  margin-bottom: 1rem;
+  max-width: 90%;
+}
+
+/* --- Ajustes extra para móviles --- */
+@media (max-width: 576px) {
+  .logo_carrusel {
+    max-width: 180px;
+    width: 60%;
+  }
+
+  .carousel-caption-overlay h1 {
+    font-size: 1.3rem;
+  }
+
+  .carousel-caption-overlay p {
+    font-size: 0.85rem;
+  }
+}
+
 /*NUESTRA CARTA*/
 /* --- Tu CSS existente --- */
 .carousel-container {
@@ -378,21 +485,37 @@ span.direccion {
 }
 
 .btn-tour {
-  padding: 1em 1.3em;
-  background-color: var(--color-coral);
-  text-align: center;
-  cursor: pointer;
-  height: 40px;
-  display: flex;
+  background-color: var(--color-verde);
+  color: var(--color-fd-blanco);
+  text-decoration: none;
+  border-radius: 6px;
+  padding: 0.5em 1em;
+  margin-left: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  height: 40px;
+  cursor: pointer;
   transition: all 0.3s ease;
-  flex: none;
 }
 
 .btn-tour:hover {
-  background-color: var(--color-turquesa);
-  transform: scale(1.05);
+  background-color: var(--color-fd-blanco);
+  color: var(--color-verde);
+  border: 1px solid var(--color-verde);
+  transform: none; /* opcional: desactiva el zoom si no quieres que se mueva */
+}
+
+/* Versión móvil: que ocupe ancho completo y se vea como opción del menú */
+@media (max-width: 991px) {
+  .btn-tour {
+    display: block;
+    width: 100%;
+    margin: 1rem 0 0;
+    text-align: center;
+  }
 }
 
 #numero-cab {

@@ -19,6 +19,50 @@
     
 </head>
 <body>
+  <!-- Modal (oculto por defecto) -->
+<div th:replace="reserva" id="modalReserva" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Registrate con nosotros</h2>
+    <form id="formReserva">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" required><br>
+
+        <label for="correo">Correo:</label>
+        <input type="email" id="correoRegistro" required><br>
+
+        <label for="password">Contraseña:</label>
+        <input type="password" id="passwordRegistro" required><br>
+
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" required><br>
+
+       <button class="btn-submit" type="submit" >Continuar</button>
+        
+    </form>
+    <button id="openLogin" class="btnModal" >¿Ya tienes cuenta? Inicia sesión</button>
+  </div>
+</div>
+<!-- Modal Login (oculto por defecto) -->
+<div th:replace="login_cli" id="modalLogin" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Inicia sesión</h2>
+    <form id="formLogin">
+        <label for="correo">Correo:</label>
+        <input type="email" id="correoLogin" required><br>
+
+        <label for="password">Contraseña:</label>
+        <input type="password" id="passwordLogin" required><br>
+
+        <button class="btn-submit" type="submit" >Continuar</button>
+        
+    </form>
+    <button class="btnModal" id="openRegistro">¿No tienes cuenta? Regístrate</button>
+  </div>
+  
+</div>
+
     <!--Header-->
     <div th:fragment="header" class="navbar">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -67,7 +111,7 @@
         </li>
 
       </ul>
-      
+      <button class="btn-tour" id="openReserva">Haz una reservación</button>
     </div>
   </div>
 </nav>
