@@ -7,9 +7,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IncioController {
 
     @GetMapping({"/" , "/index"})
-    public String incio(){
+    public String inicio(){
         return "index";
     }
-
-
+     @GetMapping({"/nosotros"})
+    public String nosotros(){
+        return "nosotros";
+    }
+     @GetMapping({"/galeria"})
+    public String galeria(){
+        return "galeria";
+    }
+     @GetMapping({"/eventos"})
+    public String eventos(){
+        return "eventos";
+    }
+     @GetMapping({"/noticias"})
+    public String noticias(){
+        return "noticias";
+    }
 }

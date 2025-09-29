@@ -1201,6 +1201,27 @@ TE PUEDE SERVIR PARA EL RESPONSIVE, GIAN
 /* =========================
    GALERÍA
    ========================= */
+/* Video de fondo */
+#bg-video {
+    position: fixed;   /* Fijo al viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cubre toda la pantalla sin deformar */
+    z-index: -1;       /* Detrás del contenido */
+}
+
+/* Contenido encima del video */
+.content {
+    position: relative;
+    z-index: 1;
+    color: white;      /* Ajusta según el video */
+    text-align: center;
+    padding: 50px;
+}
+
+
 .galeria-titulo {
   text-align: center;
   margin-top: 0;
@@ -1212,12 +1233,13 @@ TE PUEDE SERVIR PARA EL RESPONSIVE, GIAN
   color: var(--color-coral);
   font-family: var(--fuente-barlow);
   font-size: var(--text-2xl);
+  font-weight: bold;
   margin: 0;
   margin-top: 40px;
 }
 
 .titulo-principal {
-  color: var(--color-verde);
+  color: var(--color-blancoCalido);
   font-size: var(--text-3xl);
   font-weight: bold;
   font-family: var(--fuente-barlow);
@@ -1275,10 +1297,8 @@ TE PUEDE SERVIR PARA EL RESPONSIVE, GIAN
   text-align: center;
   max-width: 1200px;
   margin: 0 auto;
-  padding: var(--spacing-md);
+  padding-top: 80px;
   margin-top: 0;
-  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-    url('../imgs/eventos_fondo.jpg') center/cover no-repeat;
 }
 
 .events h2 {
@@ -1349,7 +1369,7 @@ TE PUEDE SERVIR PARA EL RESPONSIVE, GIAN
    BLOG
    ========================= */
 .blog {
-  padding: var(--spacing-md);
+  padding-top: 80px;
   font-family: 'Segoe UI', sans-serif;
   margin-top: 0;
 }
@@ -2533,7 +2553,7 @@ a {
   /* Ajustes generales para pantallas grandes */
   .hero-container { max-width: 95%; }
   .clases-container { max-width: 95%; }
-  .events { max-width: 95%; }
+  .events { max-width: 100%; }
   .formulario-section { max-width: 95%; }
   .contenedor { max-width: 95%; }
 
