@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard – Reservas</title>
+  <link rel="stylesheet" href="../css/dashboard-reservas.css" />
+</head>
+<body>
+  <!-- ====== ENCABEZADO ====== -->
+  <header class="header">
+    <h1>Panel de Administración</h1>
+    <nav class="nav">
+      <a href="dashboard-menu.html">Menú</a>
+      <a href="dashboard-reservas.html" class="active">Reservas</a>
+      <a href="../index.html">Cerrar Sesión</a>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    <!-- ====== SIDEBAR ====== -->
+    <aside class="sidebar">
+      <button class="btn" onclick="showSection('add')">➕ Agregar Reserva</button>
+      <button class="btn" onclick="showSection('list')">📋 Ver/Filtrar Reservas</button>
+    </aside>
+
+    <!-- ====== CONTENIDO ====== -->
+    <section class="content">
+      <!-- Formulario para agregar -->
+      <div id="section-add" class="section hidden">
+        <h2>Agregar Reserva</h2>
+        <form id="reserveForm">
+          <input type="text" id="resName" placeholder="Nombre del cliente" required />
+          <input type="date" id="resDate" required />
+          <input type="time" id="resTime" required />
+          <input type="number" id="resPeople" min="1" placeholder="Nº de personas" required />
+          <textarea id="resNotes" placeholder="Notas (opcional)"></textarea>
+          <button type="submit">Guardar</button>
+        </form>
+      </div>
+
+      <!-- Listado y filtros -->
+      <div id="section-list" class="section hidden">
+        <h2>Lista de Reservas</h2>
+
+<!-- === FILTROS === -->
+<div class="filters">
+  <input type="date" id="filterDate" />
+  <input type="number" id="filterPeople" min="1" placeholder="Personas" />
+  <input type="text" id="filterName" placeholder="Buscar por nombre" />
+  <button id="applyFilters">Aplicar filtros</button>
+  <button id="clearFilters">Limpiar filtros</button>
+</div>
+
+
+        <!-- === TABLA DE RESULTADOS === -->
+        <table class="reserve-table">
+          <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Fecha</th>
+              <th>Hora</th>
+              <th>Personas</th>
+              <th>Notas</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="reserveList">
+            <!-- Aquí se inyectan las filas vía JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="../scripts/dashboard-reservas.js"></script>
+</body>
+</html>

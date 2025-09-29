@@ -1,7 +1,7 @@
 /* =========================
    VARIABLES Y RESET GLOBAL
    ========================= */
-@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600&display=swap');
 :root {
   --color-verdeOsc:#04433C;
   --color-blancoCalido:#F9F7F4;
@@ -21,6 +21,7 @@
   --color-celesteoscuro: #0072ff;
   --color-verdeazulado: #1DC1B6;
   --fuente-fredoka: "Fredoka", sans-serif;
+  --fuente-barlow:"Barlow Condensed", sans-serif;
   --spacing-xs: 10px;
   --spacing-sm: 20px;
   --spacing-md: 40px;
@@ -34,7 +35,7 @@
   --text-2xl: 36px;
   --text-3xl: 48px;
 }
-* { margin: 0; padding: 0; font-family: var(--fuente-fredoka); text-decoration: none; }
+* { margin: 0; padding: 0; font-family: var(--fuente-barlow); text-decoration: none; }
 html { scroll-behavior: smooth; 
   scroll-padding-top: 80px; 
 }
@@ -46,14 +47,13 @@ section { margin-bottom: var(--spacing-xl); margin-top: 0; }
 main { padding-top: 1rem; }
 img { max-width: 100%; }
 span { font-size: var(--text-sm); font-weight: 400; }
-body{ background-color: var(--color-blancoCalido);}
+body{ background-color: var(--color-fd-blanco);}
 
 .logo{
   height: 60px;
   padding: 5%;
 }
 .navbar{
- background-color: var(--color-negro);
   height: 80px;
   position: fixed;
   top: 0;
@@ -62,12 +62,12 @@ body{ background-color: var(--color-blancoCalido);}
   z-index: 1000;
   border-bottom: 4px solid var(--color-verde);
 }
-.navbar a{
+.navbar.navbar-expand-lg .nav-link {
   color: var(--color-verde);
 }
-.navbar a:hover{
+.navbar .nav-link:hover {
   color: var(--color-fd-blanco);
-  border-bottom: 2px solid var(--color-fd-blanco)
+  border-bottom: 2px solid var(--color-fd-blanco);
 }
 /*Carrusel*/
 .carrusel{
@@ -101,6 +101,7 @@ body{ background-color: var(--color-blancoCalido);}
   color: var(--color-fd-blanco);
 }
 /*NUESTRA CARTA*/
+/* --- Tu CSS existente --- */
 .carousel-container {
   position: relative;
   overflow: hidden;
@@ -117,6 +118,25 @@ body{ background-color: var(--color-blancoCalido);}
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
+  
+  /* --- ANIMACIÓN INICIAL --- */
+  opacity: 0;
+  transform: translateY(50px);
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+/* Cuando el JS detecta que entran en pantalla */
+.card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* HOVER EFECTO "ELEVACIÓN" */
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .image-wrapper {
@@ -169,7 +189,6 @@ body{ background-color: var(--color-blancoCalido);}
 @media (max-width: 1200px) { .card { flex: 0 0 32%; } } /* 3 cards */
 @media (max-width: 992px)  { .card { flex: 0 0 48%; } } /* 2 cards */
 @media (max-width: 576px)  { .card { flex: 0 0 100%; } } /* 1 card */
-
 
 /* ==== Dashboard ==== */
 .dashboard-container {
@@ -975,16 +994,39 @@ TE PUEDE SERVIR PARA EL RESPONSIVE, GIAN
    TABLA DE CURSOS
    ========================= */
 .tabla-cursos {
-  padding: var(--spacing-md);
-  background-color: var(--color-fd-blanco);
+  position: relative; /* Necesario para que el ::before se posicione bien */
+  padding: 200px;
+  background: url('../imgs/restaurante_fondoP.png') center/cover no-repeat;
   text-align: center;
-  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* Capa oscura encima del fondo */
+.tabla-cursos::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Negro con 50% de opacidad */
+  z-index: 0;
+}
+
+/* Asegura que el contenido quede encima del overlay */
+.tabla-cursos > * {
+  position: relative;
+  z-index: 1;
 }
 
 .titulo-tabla {
-  font-size: var(--text-2xl);
-  color: var(--color-verde);
-  font-family: var(--fuente-fredoka);
+  font-size: var(--text-3xl);
+  color: var(--color-blancoCalido);
+  font-family: var(--fuente-barlow);
   margin-bottom: var(--spacing-sm);
 }
 
@@ -1022,10 +1064,14 @@ TE PUEDE SERVIR PARA EL RESPONSIVE, GIAN
   border-bottom: 1px solid var(--color-fd-blanco);
   text-align: left;
   font-size: var(--text-sm);
+  color: var(--color-blancoCalido);
+  background-color: var(--color-negro);
 }
 
-.tabla-edukid tbody tr:hover {
+
+.tabla-edukid tbody tr:hover td  {
   background-color: var(--color-fd-blanco);
+  color: var(--color-negro);
   transition: background-color 0.3s ease;
 }
 
@@ -1040,18 +1086,18 @@ TE PUEDE SERVIR PARA EL RESPONSIVE, GIAN
 }
 
 .subtitulo {
-  color: var(--color-verde);
-  font-family: var(--fuente-fredoka);
-  font-size: var(--text-xl);
+  color: var(--color-coral);
+  font-family: var(--fuente-barlow);
+  font-size: var(--text-2xl);
   margin: 0;
   margin-top: 40px;
 }
 
 .titulo-principal {
-  color: var(--color-coral);
-  font-size: var(--text-2xl);
+  color: var(--color-verde);
+  font-size: var(--text-3xl);
   font-weight: bold;
-  font-family: var(--fuente-fredoka);
+  font-family: var(--fuente-barlow);
   margin: 5px 0 0;
 }
 
@@ -1108,6 +1154,8 @@ TE PUEDE SERVIR PARA EL RESPONSIVE, GIAN
   margin: 0 auto;
   padding: var(--spacing-md);
   margin-top: 0;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    url('../imgs/eventos_fondo.jpg') center/cover no-repeat;
 }
 
 .events h2 {
@@ -1699,10 +1747,27 @@ a {
    ========================= */
 .video-section {
   padding: var(--spacing-xl) var(--spacing-md);
-  background: linear-gradient(135deg, var(--color-arena)0%,  hsl(33, 100%, 95%) 100%);
+  background: url('../imgs/laguna-fondoV.jpg') center/cover no-repeat;
   position: relative;
   overflow: hidden;
   margin-top: 0;
+}
+.video-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-turquesa);
+  opacity: 0.5; /* Ajusta la opacidad según lo que quieras */
+  z-index: 0;
+}
+
+/* Asegúrate de que el contenido esté por encima de la capa */
+.video-section > * {
+  position: relative;
+  z-index: 1;
 }
 
 .video-section .content-wrapper {

@@ -177,9 +177,9 @@ let index = 0;
 
 function getVisibleCards() {
   const width = window.innerWidth;
-  if(width <= 576) return 1;
-  if(width <= 992) return 2;
-  if(width <= 1200) return 3;
+  if (width <= 576) return 1;
+  if (width <= 992) return 2;
+  if (width <= 1200) return 3;
   return 4;
 }
 
@@ -188,6 +188,7 @@ function updateTransform() {
   wrapper.style.transform = `translateX(-${(100 / visible) * index}%)`;
 }
 
+// --- NAVEGACIÓN DEL CARRUSEL ---
 nextBtn.addEventListener('click', () => {
   const visible = getVisibleCards();
   if (index < cards.length - visible) {
@@ -204,3 +205,25 @@ prevBtn.addEventListener('click', () => {
 });
 
 window.addEventListener('resize', updateTransform);
+
+// --- ANIMACIÓN AL HACER SCROLL ---
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      const index = [...cards].indexOf(entry.target);
+
+      if (entry.isIntersecting) {
+        // Añadimos clase visible con pequeño delay
+        setTimeout(() => {
+          entry.target.classList.add("visible");
+        }, index * 150);
+      } else {
+        // Cuando la card sale de vista, quitamos la clase
+        entry.target.classList.remove("visible");
+      }
+    });
+  },
+  { threshold: 0.2 } // Activa cuando al menos 20% de la card es visible
+);
+
+cards.forEach((card) => observer.observe(card));
