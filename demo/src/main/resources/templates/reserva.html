@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reserva - El Sauce</title>
+
+    <!-- Estilos globales -->
+    <link rel="stylesheet" href="../css/styles.css" />
+    <!-- Estilos específicos de reservas -->
+    <link rel="stylesheet" href="../css/reserva.css" />
+  </head>
+  <body>
+    <header class="reserva-header">
+      <h1>Reserva tu Mesa</h1>
+      <p>Sigue los pasos para completar tu reserva.</p>
+    </header>
+
+    <!-- Línea de progreso -->
+    <div class="timeline">
+      <div class="step active" data-step="1">Personas</div>
+      <div class="step" data-step="2">Fecha</div>
+      <div class="step" data-step="3">Hora</div>
+      <div class="step" data-step="4">Zona</div>
+      <div class="step" data-step="5">Datos</div>
+      <div class="step" data-step="6">Pago</div>
+    </div>
+
+    <!-- Contenedor de pasos -->
+    <main class="reserva-container">
+      <!-- Paso 1: Personas -->
+      <section class="reserva-step active" data-step="1">
+        <h2>¿Cuántas personas asistirán?</h2>
+        <input type="number" id="personas" min="1" max="8" value="2" />
+        <p class="nota">
+          Máximo 8 personas. Para más de 8, comunícate al
+          <strong>+51 987 654 321</strong>.
+        </p>
+        <div class="acciones">
+          <button class="btn-siguiente">Siguiente</button>
+        </div>
+      </section>
+
+      <!-- Paso 2: Fecha -->
+      <section class="reserva-step" data-step="2">
+        <h2>Selecciona la fecha</h2>
+        <div class="calendar-wrapper">
+          <button class="cal-nav prev">&laquo;</button>
+          <div id="calendar-container">
+            <!-- JS inyecta aquí el mes actual -->
+          </div>
+          <button class="cal-nav next">&raquo;</button>
+        </div>
+        <div class="acciones">
+          <button class="btn-anterior">Atrás</button>
+          <button class="btn-siguiente">Siguiente</button>
+        </div>
+      </section>
+
+      <!-- Paso 3: Hora -->
+      <section class="reserva-step" data-step="3">
+        <h2>Selecciona la hora</h2>
+        <div id="hora-grid" class="hora-grid"></div>
+        <div class="acciones">
+          <button class="btn-anterior">Atrás</button>
+          <button class="btn-siguiente">Siguiente</button>
+        </div>
+      </section>
+
+      <!-- Paso 4: Zona -->
+      <section class="reserva-step" data-step="4">
+        <h2>Elige tu zona preferida</h2>
+        <div class="zona-carrusel">
+          <button class="zona-nav prev">‹</button>
+          <div class="zona-slides">
+            <div class="zona-slide" data-zona="Muelle Panorámico">
+              <div class="zona-img-wrapper">
+                <img src="../imgs/muelle.jpg" alt="Muelle Panorámico" />
+                <div class="zona-overlay">
+                  <h3>Muelle Panorámico</h3>
+                  <p>Brisa del lago y pasarela de madera.</p>
+                </div>
+              </div>
+            </div>
+            <div class="zona-slide" data-zona="Mirador Azul">
+              <div class="zona-img-wrapper">
+                <img src="../imgs/mirador.jpg" alt="Mirador Azul" />
+                <div class="zona-overlay">
+                  <h3>Mirador Azul</h3>
+                  <p>Vista abierta a la Laguna Azul.</p>
+                </div>
+              </div>
+            </div>
+            <div class="zona-slide" data-zona="Salón Bosque">
+              <div class="zona-img-wrapper">
+                <img src="../imgs/salon.jpg" alt="Salón Bosque" />
+                <div class="zona-overlay">
+                  <h3>Salón Bosque</h3>
+                  <p>Ambiente cálido y rodeado de plantas.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="zona-nav next">›</button>
+        </div>
+        <div class="acciones">
+          <button class="btn-anterior">Atrás</button>
+          <button class="btn-siguiente">Siguiente</button>
+        </div>
+      </section>
+
+      <!-- Paso 5: Datos del cliente -->
+      <section class="reserva-step" data-step="5">
+        <h2>Completa tus datos</h2>
+
+        <!-- Resumen rápido de la reserva -->
+        <div class="resumen-reserva" id="resumen-reserva"></div>
+
+        <!-- Datos personales -->
+        <div class="datos-personales">
+          <label
+            >Nombre
+            <input type="text" id="nombre" required />
+          </label>
+          <label
+            >Apellidos
+            <input type="text" id="apellidos" required />
+          </label>
+          <label
+            >Email
+            <input type="email" id="email" required />
+          </label>
+          <label
+            >Teléfono
+            <input type="tel" id="telefono" placeholder="+51 ..." required />
+          </label>
+        </div>
+
+        <!-- Tipo de comprobante -->
+        <div class="comprobante">
+          <label>Tipo de documento</label>
+          <select id="tipo-comprobante">
+            <option value="">Selecciona…</option>
+            <option value="boleta">Boleta (DNI/Pasaporte)</option>
+            <option value="factura">Factura (RUC/RUT)</option>
+          </select>
+
+          <div id="factura-campos" class="extra-campos hidden">
+            <label
+              >Número de RUC o RUT
+              <input type="text" id="ruc" />
+            </label>
+            <label
+              >Nombre o razón social
+              <input type="text" id="razon" />
+            </label>
+            <label
+              >Dirección fiscal
+              <input type="text" id="direccion-fiscal" />
+            </label>
+            <label
+              >Email de facturación
+              <input type="email" id="email-factura" />
+            </label>
+          </div>
+
+          <div id="boleta-campos" class="extra-campos hidden">
+            <label
+              >Número de documento
+              <input type="text" id="doc-boleta" />
+            </label>
+          </div>
+        </div>
+
+        <!-- Casillas de aceptación -->
+        <div class="aceptacion">
+          <label>
+            <input type="checkbox" id="acepto-terminos" required />
+            Acepto los términos, condiciones y políticas de privacidad.
+          </label>
+          <label>
+            <input type="checkbox" id="acepto-comunicaciones" />
+            Consiento recibir comunicaciones del restaurante por e-mail y/o SMS.
+          </label>
+        </div>
+
+        <div class="acciones">
+          <button class="btn-anterior">Atrás</button>
+          <button id="btn-continuar">Continuar</button>
+        </div>
+      </section>
+
+      <!-- Paso 6: Información de tarjeta -->
+      <section class="reserva-step" data-step="6">
+        <h2>Ingresa la información de tu tarjeta</h2>
+        <p>No estás realizando ningún pago en este momento…</p>
+
+        <!-- campos de tarjeta -->
+        <label
+          >Nombre del titular <input type="text" id="nombre-tarjeta"
+        /></label>
+        <label
+          >Número de tarjeta <input type="text" id="numero-tarjeta"
+        /></label>
+        <label>CVV/CV2 <input type="text" id="cvv" /></label>
+
+        <!-- Resumen final -->
+        <div id="resumen-final"></div>
+
+        <div class="acciones">
+          <button class="btn-anterior">Atrás</button>
+          <button id="btn-confirmar">Finalizar Reserva</button>
+        </div>
+      </section>
+
+      <!-- 👇 Aquí cierras el main -->
+    </main>
+
+    <script src="../scripts/reserva.js"></script>
+  </body>
+</html>
