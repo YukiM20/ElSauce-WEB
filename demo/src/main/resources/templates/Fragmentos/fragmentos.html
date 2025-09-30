@@ -106,9 +106,14 @@
           <a class="nav-link" th:href="@{/noticias}">Noticias</a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" th:href="@{/index#contacto}">Contacto</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="true">Contacto</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" th:href="@{/index#mas_informacion}">Más información</a></li>
+            <li><a class="dropdown-item" th:href="@{/index#contacto}">Síguenos</a></li>
+          </ul>
         </li>
+
 
       </ul>
       <button class="btn-tour" id="openReserva">Haz una reservación</button>

@@ -1523,7 +1523,8 @@ TE PUEDE SERVIR PARA EL RESPONSIVE, GIAN
 }
 
 .cta-button:hover {
-  background-color: var(--color-coral);
+  background-color: var(--color-turquesa);
+  color: var(--color-blancoCalido);
 }
 @keyframes pulse-orange {
   0% {
