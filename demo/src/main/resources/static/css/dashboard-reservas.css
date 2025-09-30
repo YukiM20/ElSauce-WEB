@@ -1,0 +1,180 @@
+/* === Reset y estilos base (idénticos al dashboard-menu.css) === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f5f5f5;
+  color: #333;
+}
+
+.header {
+  background: #2c3e50;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 { font-size: 1.5rem; }
+
+.nav a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+}
+.nav a.active {
+  font-weight: bold;
+  border-bottom: 2px solid #e67e22;
+}
+
+.main-content {
+  display: flex;
+  min-height: calc(100vh - 70px);
+}
+
+.sidebar {
+  background: #34495e;
+  width: 220px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.btn {
+  background: #e67e22;
+  border: none;
+  padding: 10px;
+  color: white;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: left;
+}
+.btn:hover { background: #d35400; }
+
+.content {
+  flex: 1;
+  padding: 30px;
+  background: white;
+}
+
+.section { display: none; }
+.section.active { display: block; }
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+input, textarea, button {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button[type="submit"] {
+  background: #27ae60;
+  color: white;
+  border: none;
+}
+button[type="submit"]:hover { background: #2ecc71; }
+
+/* === Lista de reservas === */
+#reserveList {
+  list-style: none;
+  margin-top: 15px;
+}
+#reserveList li {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  background: #fafafa;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+#reserveList li .details {
+  flex: 1;
+}
+#reserveList li button {
+  background: #c0392b;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#reserveList li button:hover { background: #e74c3c; }
+
+/* === Filtros de la tabla === */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.filters input,
+.filters button {
+  padding: 8px;
+  font-size: 0.95rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.filters button {
+  background: #2980b9;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+}
+
+.filters button:hover {
+  background: #3498db;
+}
+
+/* Tabla de reservas */
+.reserve-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.reserve-table th,
+.reserve-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.reserve-table th {
+  background: #f0f0f0;
+  font-weight: bold;
+}
+
+.reserve-table tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.reserve-table button {
+  background: #c0392b;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.reserve-table button:hover {
+  background: #e74c3c;
+}

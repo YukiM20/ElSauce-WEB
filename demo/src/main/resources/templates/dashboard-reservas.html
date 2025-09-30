@@ -4,16 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard – Reservas</title>
-  <link rel="stylesheet" href="../css/dashboard-reservas.css" />
+  <link rel="stylesheet" th:href="@{/dashboard-reservas.css}" />
 </head>
 <body>
   <!-- ====== ENCABEZADO ====== -->
   <header class="header">
     <h1>Panel de Administración</h1>
     <nav class="nav">
-      <a href="dashboard-menu.html">Menú</a>
-      <a href="dashboard-reservas.html" class="active">Reservas</a>
-      <a href="../index.html">Cerrar Sesión</a>
+      <a th:href="@{dashboard-menu.html}">Menú</a>
+      <a th:href="@{dashboard-reservas.html}" class="active">Reservas</a>
+      <a th:href="@{index.html}">Cerrar Sesión</a>
     </nav>
   </header>
 
@@ -73,6 +73,6 @@
     </section>
   </main>
 
-  <script src="../scripts/dashboard-reservas.js"></script>
+  <script th:src="@{/scripts/dashboard-reservas.js}"></script>
 </body>
 </html>
