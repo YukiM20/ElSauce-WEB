@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
+
+
 @Controller
 public class AdminController {
 
@@ -30,5 +32,13 @@ public class AdminController {
 
         model.addAttribute("error", "Usuario o contraseña incorrectos");
         return "admin";
+    }
+    @PostMapping("/dashboard-menu")
+    public String menu() {
+        return "dashboard-menu";
+    }
+    @PostMapping("/dashboard-reservas")
+    public String reservas() {
+        return "dashboard-reservas";
     }
 }

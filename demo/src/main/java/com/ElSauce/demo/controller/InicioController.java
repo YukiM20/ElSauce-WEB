@@ -3,8 +3,9 @@ package com.ElSauce.demo.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+
 @Controller
-public class IncioController {
+public class InicioController {
 
     @GetMapping({"/" , "/index"})
     public String inicio(){
@@ -26,4 +27,9 @@ public class IncioController {
     public String noticias(){
         return "noticias";
     }
+    @GetMapping("/reserva")
+    public String reserva() {
+        return "reserva";
+    }
+    
 }

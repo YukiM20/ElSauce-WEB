@@ -173,7 +173,7 @@ body{ background-color: var(--color-fd-blanco);}
 }
 
 .carousel-caption-overlay .logo_carrusel,
-.carousel-caption-overlay .btn-tour {
+.carousel-caption-overlay .btn-tour{
   pointer-events: auto;
 }
 
