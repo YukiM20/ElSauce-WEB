@@ -313,6 +313,10 @@ body {
   margin-top: 0.8rem;
   font-size: 0.9rem;
 }
+
+.hidden {
+  display: none;
+}
 /* ===========================
    Paso 6: Información de tarjeta
    =========================== */

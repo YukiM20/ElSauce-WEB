@@ -228,6 +228,79 @@ document.addEventListener("DOMContentLoaded", () => {
 // ----------------------------
 const formDatos = document.getElementById("form-datos");
 const btnContinuar = document.getElementById("btn-continuar");
+const emailInput = document.getElementById("email");
+const telefonoInput = document.getElementById("telefono");
+const tipoComprobante = document.getElementById("tipo-comprobante");
+const boletaCampos = document.getElementById("boleta-campos");
+const facturaCampos = document.getElementById("factura-campos");
+
+if (emailInput) {
+  emailInput.addEventListener("input", () => {
+    const value = emailInput.value.trim();
+
+    if (!value.endsWith("@gmail.com") && value !== "") {
+      emailInput.setCustomValidity("Solo se permiten correos @gmail.com");
+    } else {
+      emailInput.setCustomValidity("");
+    }
+  });
+}
+
+if (telefonoInput) {
+  // Colocar el prefijo inicial al cargar
+  telefonoInput.value = "+51 ";
+
+  telefonoInput.addEventListener("focus", () => {
+    if (!telefonoInput.value.startsWith("+51")) {
+      telefonoInput.value = "+51 ";
+    }
+  });
+
+  telefonoInput.addEventListener("input", () => {
+    // Evitar que borre o modifique el prefijo
+    if (!telefonoInput.value.startsWith("+51")) {
+      telefonoInput.value = "+51 " + telefonoInput.value.replace(/[^0-9]/g, "");
+    }
+
+    // Quitar caracteres no numéricos después del prefijo
+    const soloNumeros = telefonoInput.value
+      .replace("+51", "")
+      .replace(/\D/g, "");
+
+    // Limitar a 9 dígitos después del +51
+    if (soloNumeros.length > 9) {
+      telefonoInput.value = "+51 " + soloNumeros.slice(0, 9);
+    }
+  });
+
+  telefonoInput.addEventListener("blur", () => {
+    // Mostrar aviso nativo si no hay 9 dígitos
+    const soloNumeros = telefonoInput.value.replace("+51", "").replace(/\D/g, "");
+    if (soloNumeros.length !== 9) {
+      telefonoInput.setCustomValidity("El número debe tener 9 dígitos");
+    } else {
+      telefonoInput.setCustomValidity("");
+    }
+  });
+}
+
+if (tipoComprobante) {
+  tipoComprobante.addEventListener("change", () => {
+    const tipo = tipoComprobante.value;
+
+    if (tipo === "boleta") {
+      boletaCampos.classList.remove("hidden");
+      facturaCampos.classList.add("hidden");
+    } else if (tipo === "factura") {
+      facturaCampos.classList.remove("hidden");
+      boletaCampos.classList.add("hidden");
+    } else {
+      // si elige "Selecciona…"
+      facturaCampos.classList.add("hidden");
+      boletaCampos.classList.add("hidden");
+    }
+  });
+}
 
 if (formDatos) {
   formDatos.addEventListener("submit", (e) => {
@@ -246,6 +319,7 @@ if (formDatos) {
     reservaData.telefono = document.getElementById("telefono").value.trim();
     reservaData.comprobante = document.getElementById("tipo-comprobante").value;
 
+    
     // Verifica la casilla de privacidad por si acaso
     const privacidad = document.getElementById("acepto-terminos");
     if (!privacidad.checked) {
