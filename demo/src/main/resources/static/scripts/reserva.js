@@ -34,9 +34,47 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   btnSiguientes.forEach(btn => btn.addEventListener("click", () => {
-    const current = getActiveStepIndex();
-    if (current < steps.length - 1) showStep(current + 1);
-  }));
+  const current = getActiveStepIndex();
+
+  // ⚡ VALIDACIÓN SOLO EN EL PRIMER PASO (Personas)
+  if (current === 0) {
+    const personas = parseInt(reservaData.personas);
+
+    if (personas < 2) {
+      alert("❌ ERROR: El mínimo es 2 personas. Ingrese nuevamente por favor.");
+      return; // 🔒 No avanza
+    }
+
+    if (personas > 8) {
+      alert("⚠️ Nuestro personal se comunicará con usted apenas envíe la reservación.");
+      // ✅ Luego sí avanza al siguiente paso
+    }
+  }
+
+  if (current === 1) {
+    if (!reservaData.fecha) {
+      alert("📅 Por favor, seleccione una fecha antes de continuar.");
+      return; // 🔒 No avanza
+    }
+  }
+
+  if (current === 2) {
+    if (!reservaData.hora) {
+      alert("⚠️ Por favor, seleccione un horario antes de continuar.");
+      return; // 🔒 No avanza
+    }
+  }
+
+  if (current === 3) {
+    if (!reservaData.zona) {
+      alert("📍 Por favor, seleccione una zona antes de continuar.");
+      return;
+    }
+  }
+
+  // 👇 Navegación normal (solo si pasó validación)
+  if (current < steps.length - 1) showStep(current + 1);
+}));
 
   btnAnteriores.forEach(btn => btn.addEventListener("click", () => {
     const current = getActiveStepIndex();
@@ -185,31 +223,42 @@ document.addEventListener("DOMContentLoaded", () => {
   // ----------------------------
   // 7) PASO 5: Datos del cliente + resumen
   // ----------------------------
-  const tipoComprobante = document.getElementById("tipo-comprobante");
-  const facturaCampos = document.getElementById("factura-campos");
-  const boletaCampos = document.getElementById("boleta-campos");
-  const btnContinuar = document.getElementById("btn-continuar");
+  // ----------------------------
+// 7) PASO 5: Datos del cliente + resumen
+// ----------------------------
+const formDatos = document.getElementById("form-datos");
+const btnContinuar = document.getElementById("btn-continuar");
 
-  if (tipoComprobante) {
-    tipoComprobante.addEventListener("change", () => {
-      facturaCampos.classList.toggle("hidden", tipoComprobante.value !== "factura");
-      boletaCampos.classList.toggle("hidden", tipoComprobante.value !== "boleta");
-    });
-  }
+if (formDatos) {
+  formDatos.addEventListener("submit", (e) => {
+    e.preventDefault(); // no recarga la página
 
-  if (btnContinuar) {
-    btnContinuar.addEventListener("click", () => {
-      reservaData.nombre = document.getElementById("nombre").value;
-      reservaData.apellidos = document.getElementById("apellidos").value;
-      reservaData.email = document.getElementById("email").value;
-      reservaData.telefono = document.getElementById("telefono").value;
-      reservaData.comprobante = tipoComprobante.value;
+    // Validación automática del navegador
+    if (!formDatos.checkValidity()) {
+      formDatos.reportValidity(); // muestra mensajes "Por favor complete este campo"
+      return; // 🔒 no avanza
+    }
 
-      // Mostrar paso 6
-      const idxPaso6 = steps.findIndex(s => s.dataset.step === "6");
-      if (idxPaso6 !== -1) showStep(idxPaso6);
-    });
-  }
+    // Si todo es válido, guarda los datos en el objeto reservaData
+    reservaData.nombre = document.getElementById("nombre").value.trim();
+    reservaData.apellidos = document.getElementById("apellidos").value.trim();
+    reservaData.email = document.getElementById("email").value.trim();
+    reservaData.telefono = document.getElementById("telefono").value.trim();
+    reservaData.comprobante = document.getElementById("tipo-comprobante").value;
+
+    // Verifica la casilla de privacidad por si acaso
+    const privacidad = document.getElementById("acepto-terminos");
+    if (!privacidad.checked) {
+      alert("🔒 Debes aceptar los términos y condiciones para continuar.");
+      return;
+    }
+
+    // ✅ Avanza al paso 6
+    const idxPaso6 = steps.findIndex((s) => s.dataset.step === "6");
+    if (idxPaso6 !== -1) showStep(idxPaso6);
+  });
+}
+
 
   // ----------------------------
   // 8) PASO 6: Confirmar tarjeta + resumen final
@@ -241,14 +290,55 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (btnConfirmar) {
-    btnConfirmar.addEventListener("click", () => {
-      alert("¡Reserva confirmada! Recibirás un SMS o correo con los detalles.");
-    });
-  }
+  btnConfirmar.addEventListener("click", (e) => {
+    e.preventDefault();
 
-  // ----------------------------
-  // 9) Mostrar primer paso
-  // ----------------------------
-  showStep(0);
+    // Campos de tarjeta
+    const nombreTarjeta = document.getElementById("nombre-tarjeta");
+    const numeroTarjeta = document.getElementById("numero-tarjeta");
+    const cvv = document.getElementById("cvv");
+
+    // Validaciones básicas
+    numeroTarjeta.setCustomValidity("");
+    cvv.setCustomValidity("");
+
+    if (!nombreTarjeta.value || !numeroTarjeta.value || !cvv.value) {
+      alert("Por favor, completa todos los datos de la tarjeta.");
+      return;
+    }
+
+    if (numeroTarjeta.value.length < 12 || numeroTarjeta.value.length > 19) {
+      numeroTarjeta.setCustomValidity("El número de tarjeta debe tener entre 12 y 19 dígitos.");
+      numeroTarjeta.reportValidity();
+      return;
+    }
+
+    if (cvv.value.length < 3 || cvv.value.length > 4) {
+      cvv.setCustomValidity("El CVV debe tener 3 o 4 dígitos.");
+      cvv.reportValidity();
+      return;
+    }
+
+    // ✅ Crear el objeto reserva en el formato que el dashboard espera
+    const newRes = {
+      id: Date.now() + Math.floor(Math.random() * 10000),
+      name: `${reservaData.nombre} ${reservaData.apellidos}`,
+      date: reservaData.fecha ? reservaData.fecha.toLocaleDateString() : "",
+      time: reservaData.hora || "",
+      people: Number(reservaData.personas) || 0,
+      notes: `Zona: ${reservaData.zona || "No especificada"}`,
+    };
+
+    // Guardar en localStorage
+    const reservas = JSON.parse(localStorage.getItem("reservas")) || [];
+    reservas.push(newRes);
+    localStorage.setItem("reservas", JSON.stringify(reservas));
+
+    // ✅ Redirigir al index
+    alert("✅ ¡Reserva confirmada! Serás redirigido al inicio.");
+    window.location.href = "/";
+  });
+}
+
 });
 

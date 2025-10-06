@@ -147,30 +147,30 @@ body {
   transition: background 0.2s;
 }
 
+/* 🔹 Hover: mismo color que el seleccionado, pero más claro */
 .day:hover {
-  background: var(--color-arena);
+  background: rgba(26, 188, 156, 0.4); /* turquesa claro (0.4 = 40% opacidad) */
 }
 
+/* 🔹 Días no disponibles */
 .day.disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
 
+/* 🔹 Día actual (hoy) gris */
 .day.today {
+  background: #d3d3d3;
+  color: #333;
+}
+
+/* 🔹 Día seleccionado */
+.day.selected {
   background: var(--color-turquesa);
-  color: #fff;
-}
-
-.day.selected {
-  background: var(--color-coral);
-  color: #fff;
-}
-
-.day.selected {
-  background-color: var(--color-turquesa);
   color: #fff;
   border-radius: 6px;
 }
+
 
 /* ======= CUADRÍCULA DE HORAS ======= */
 .hora-grid {
