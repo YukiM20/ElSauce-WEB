@@ -43,7 +43,7 @@ html { scroll-behavior: smooth;
 /* =========================
    ESTILOS GENERALES
    ========================= */
-section { margin-bottom: var(--spacing-xl); margin-top: 0; }
+section { margin-top: 0; }
 main { padding-top: 1rem; }
 img { max-width: 100%; }
 span { font-size: var(--text-sm); font-weight: 400; }
@@ -661,7 +661,7 @@ span.direccion {
 }
 .modal-content {
   background: #fff;
-  margin: 10% auto;
+  margin: 6% auto;
   padding: 20px;
   width: 350px;
   border-radius: 12px;
